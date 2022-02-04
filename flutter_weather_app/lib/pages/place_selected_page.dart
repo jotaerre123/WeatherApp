@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_weather_app/models/city_model.dart';
 
-
 import 'package:flutter_weather_app/models/weather_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -10,7 +9,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 late Future<List<WeatherModel>> items;
 
 late String citiSelect = "";
-
 
 @override
 Widget build(BuildContext context) {
@@ -46,14 +44,12 @@ class PlaceSelected extends StatefulWidget {
 
   final String title;
 
-
   @override
   State<PlaceSelected> createState() => _MyHomePageState2();
 }
 
 class _MyHomePageState2 extends State<PlaceSelected> {
   late Future<WeatherModel> items;
-  
 
   @override
   void initState() {
@@ -63,49 +59,55 @@ class _MyHomePageState2 extends State<PlaceSelected> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      
-      home: Scaffold(
-        
-        body: Container(
-          width: MediaQuery.of(context).size.width,
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage(
-                  "assets/images/earth.png",
-                ),
-                fit: BoxFit.cover)),
-          child: Padding(
-            padding: const EdgeInsets.all(50.0),
-            child: Column(
-              children: [
-                FutureBuilder<WeatherModel>(
-                  future: items,
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData) {
-                      return name(snapshot.data!);
-                    } else if (snapshot.hasError) {
-                      return Text('${snapshot.error}');
-                    }
-    
-                    return const Center(child: CircularProgressIndicator());
-                  },
-                )
-              ],
+    if (citiSelect=="") {
+      return MaterialApp(
+        home: Scaffold(body: Padding(
+          padding: const EdgeInsets.only(top: 50),
+          child: Text('No hay nada selecciondo'),
+        ),),
+      );
+    } else {
+      return MaterialApp(
+        home: Scaffold(
+          body: Container(
+            width: MediaQuery.of(context).size.width,
+            decoration: const BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage(
+                      "assets/images/earth.png",
+                    ),
+                    fit: BoxFit.cover)),
+            child: Padding(
+              padding: const EdgeInsets.all(50.0),
+              child: Column(
+                children: [
+                  FutureBuilder<WeatherModel>(
+                    future: items,
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        return name(snapshot.data!);
+                      } else if (snapshot.hasError) {
+                        return Text('${snapshot.error}');
+                      }
+
+                      return const Center(child: CircularProgressIndicator());
+                    },
+                  )
+                ],
+              ),
             ),
           ),
         ),
-      ),
-    );
+      );
+    }
   }
-
- 
 
   Future<WeatherModel> fetchPlanets() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    var index =prefs.getInt('indexCity');
+    var index = prefs.getInt('indexCity');
     citiSelect = coord[index!].city;
-    final response = await http.get(Uri.parse('https://api.openweathermap.org/data/2.5/weather?q=${citiSelect}&appid=b67e3a6f41956f3d2f21725d8148ee93'));
+    final response = await http.get(Uri.parse(
+        'https://api.openweathermap.org/data/2.5/weather?q=${citiSelect}&appid=b67e3a6f41956f3d2f21725d8148ee93'));
     if (response.statusCode == 200) {
       return WeatherModel.fromJson(jsonDecode(response.body));
     } else {
@@ -113,9 +115,7 @@ class _MyHomePageState2 extends State<PlaceSelected> {
     }
   }
 
-  
-
- /* Widget _planetItem(Current planet) {
+  /* Widget _planetItem(Current planet) {
     return Container(
         margin: const EdgeInsets.symmetric(vertical: 20.0),
         width: 150,
@@ -139,10 +139,11 @@ class _MyHomePageState2 extends State<PlaceSelected> {
         ));
   }*/
 
-  Widget name(WeatherModel response){
-
-    return Text(response.name, style: TextStyle(color: Colors.white),);
-
+  Widget name(WeatherModel response) {
+    return Text(
+      response.name,
+      style: TextStyle(color: Colors.white),
+    );
   }
 
   @override

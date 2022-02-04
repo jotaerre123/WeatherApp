@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_weather_app/pages/place_selected_page.dart';
 
 import 'city_selection_page.dart';
+import 'mars_page.dart';
 
 
 
@@ -24,7 +25,7 @@ class _MyHomePageState extends State<Home> {
        title: 'Place',
     ),
     
-    Text('pepo')
+    
     
   ];
 
