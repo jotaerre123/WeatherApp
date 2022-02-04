@@ -1,13 +1,15 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter_weather_app/models/city_model.dart';
 
 
 import 'package:flutter_weather_app/models/weather_model.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 late Future<List<WeatherModel>> items;
 
-
+late String citiSelect = "";
 
 
 @override
@@ -43,6 +45,7 @@ class PlaceSelected extends StatefulWidget {
   // always marked "final".
 
   final String title;
+
 
   @override
   State<PlaceSelected> createState() => _MyHomePageState2();
@@ -99,7 +102,10 @@ class _MyHomePageState2 extends State<PlaceSelected> {
  
 
   Future<WeatherModel> fetchPlanets() async {
-    final response = await http.get(Uri.parse('https://api.openweathermap.org/data/2.5/weather?lat=37.3805993&lon=-6.1311544&appid=b67e3a6f41956f3d2f21725d8148ee93'));
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var index =prefs.getInt('indexCity');
+    citiSelect = coord[index!].city;
+    final response = await http.get(Uri.parse('https://api.openweathermap.org/data/2.5/weather?q=${citiSelect}&appid=b67e3a6f41956f3d2f21725d8148ee93'));
     if (response.statusCode == 200) {
       return WeatherModel.fromJson(jsonDecode(response.body));
     } else {

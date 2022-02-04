@@ -19,10 +19,11 @@ class _MyHomePageState extends State<Home> {
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget>[
     
+    SelectCity(),
     PlaceSelected(
        title: 'Place',
     ),
-    SelectCity(), 
+    
     Text('pepo')
     
   ];
