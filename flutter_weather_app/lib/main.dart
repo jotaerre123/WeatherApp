@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'pages/home.dart';
+import 'pages/place_selected_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -57,7 +58,8 @@ class _MyHomePageState extends State<MyHomePage> {
  
     return MaterialApp(initialRoute: '/',
     routes: {
-      '/': (context) => const Home()
+      '/': (context) => const Home(),
+      '/place_selected': (context) => const PlaceSelected(title: '',)
     },);
   }
 }

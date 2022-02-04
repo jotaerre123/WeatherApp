@@ -1,10 +1,11 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 
-import 'package:flutter_weather_app/models/one_call_model.dart';
+
+import 'package:flutter_weather_app/models/weather_model.dart';
 import 'package:http/http.dart' as http;
 
-late Future<List<Current>> items;
+late Future<List<WeatherModel>> items;
 
 
 
@@ -25,12 +26,12 @@ Widget build(BuildContext context) {
       // is not restarted.
       primarySwatch: Colors.blue,
     ),
-    home: const Mangas(title: 'Flutter Demo Home Page'),
+    home: const PlaceSelected(title: 'Flutter Demo Home Page'),
   );
 }
 
-class Mangas extends StatefulWidget {
-  const Mangas({Key? key, required this.title}) : super(key: key);
+class PlaceSelected extends StatefulWidget {
+  const PlaceSelected({Key? key, required this.title}) : super(key: key);
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -44,11 +45,11 @@ class Mangas extends StatefulWidget {
   final String title;
 
   @override
-  State<Mangas> createState() => _MyHomePageState2();
+  State<PlaceSelected> createState() => _MyHomePageState2();
 }
 
-class _MyHomePageState2 extends State<Mangas> {
-  late Future<Current> items;
+class _MyHomePageState2 extends State<PlaceSelected> {
+  late Future<WeatherModel> items;
   
 
   @override
@@ -59,32 +60,48 @@ class _MyHomePageState2 extends State<Mangas> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        children: [
-          FutureBuilder<Current>(
-            future: items,
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                return _planetItem(snapshot.data!);
-              } else if (snapshot.hasError) {
-                return Text('${snapshot.error}');
-              }
-
-              return const Center(child: CircularProgressIndicator());
-            },
-          )
-        ],
+    return MaterialApp(
+      
+      home: Scaffold(
+        
+        body: Container(
+          width: MediaQuery.of(context).size.width,
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage(
+                  "assets/images/earth.png",
+                ),
+                fit: BoxFit.cover)),
+          child: Padding(
+            padding: const EdgeInsets.all(50.0),
+            child: Column(
+              children: [
+                FutureBuilder<WeatherModel>(
+                  future: items,
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return name(snapshot.data!);
+                    } else if (snapshot.hasError) {
+                      return Text('${snapshot.error}');
+                    }
+    
+                    return const Center(child: CircularProgressIndicator());
+                  },
+                )
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }
 
  
 
-  Future<Current> fetchPlanets() async {
-    final response = await http.get(Uri.parse('https://api.jikan.moe/v4/manga?type=manga&order_by=mal_id&sort=desc&q=JoJo no '));
+  Future<WeatherModel> fetchPlanets() async {
+    final response = await http.get(Uri.parse('https://api.openweathermap.org/data/2.5/weather?lat=37.3805993&lon=-6.1311544&appid=b67e3a6f41956f3d2f21725d8148ee93'));
     if (response.statusCode == 200) {
-      return OneCallModel.fromJson(jsonDecode(response.body)).current;
+      return WeatherModel.fromJson(jsonDecode(response.body));
     } else {
       throw Exception('Failed to load planets');
     }
@@ -92,7 +109,7 @@ class _MyHomePageState2 extends State<Mangas> {
 
   
 
-  Widget _planetItem(Current planet) {
+ /* Widget _planetItem(Current planet) {
     return Container(
         margin: const EdgeInsets.symmetric(vertical: 20.0),
         width: 150,
@@ -114,6 +131,12 @@ class _MyHomePageState2 extends State<Mangas> {
             ),
           ),
         ));
+  }*/
+
+  Widget name(WeatherModel response){
+
+    return Text(response.name, style: TextStyle(color: Colors.white),);
+
   }
 
   @override
