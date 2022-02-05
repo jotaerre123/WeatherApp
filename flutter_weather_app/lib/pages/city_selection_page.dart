@@ -46,7 +46,7 @@ class _MyHomePageState extends State<SelectCity> {
   late Future<List<LocationModel>> items;
   @override
   void initState() {
-    items = fetchPeople();
+    items = fetchCities();
     super.initState();
   }
   @override
@@ -84,7 +84,7 @@ class _MyHomePageState extends State<SelectCity> {
       ),
     );
   }
-  Future<List<LocationModel>> fetchPeople() async {
+  Future<List<LocationModel>> fetchCities() async {
     
     return coord;
   }
@@ -103,9 +103,10 @@ class _MyHomePageState extends State<SelectCity> {
   }
   Widget _cityItem(LocationModel people, int index) {
     return Container(
-        margin: const EdgeInsets.symmetric(vertical: 20.0),
+      margin: EdgeInsets.all(8),
         width: 150,
         child: Card(
+          color: Colors.white24,
           child: InkWell(
             splashColor: Colors.red.withAlpha(30),
             onTap: () async{
@@ -114,14 +115,16 @@ class _MyHomePageState extends State<SelectCity> {
             },
             child: SizedBox(
               width: 300,
-              height: 150,
+              height: 50,
               child: Column(
                 children: [
-                  Text(people.city),
+                  Text(people.city, style: TextStyle(color: Colors.white),),
                 ],
               ),
             ),
           ),
         ));
   }
+
+  
 }

@@ -19,14 +19,14 @@ class _MyHomePageState extends State<Home> {
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget>[
-    
-    SelectCity(),
     PlaceSelected(
        title: 'Place',
     ),
-    
-    
-    
+
+    SelectCity(),
+
+
+    Mars()
   ];
 
   void _onItemTapped(int index) {
@@ -59,13 +59,12 @@ class _MyHomePageState extends State<Home> {
         backgroundColor: Colors.black87,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.map_outlined,),
-            label: 'City',
-            
-          ),
-          BottomNavigationBarItem(
             icon: Icon(Icons.home_outlined),
             label: 'Current',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.map_outlined,),
+            label: 'City',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.filter_tilt_shift_sharp),
@@ -74,6 +73,7 @@ class _MyHomePageState extends State<Home> {
         ],
        currentIndex: _selectedIndex,
         selectedItemColor: Colors.amber[800],
+        unselectedItemColor: Colors.white70,
         onTap: _onItemTapped,
       ),
     );

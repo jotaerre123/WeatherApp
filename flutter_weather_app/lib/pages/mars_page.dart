@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 
 void main() {
-  runApp(const MyApp());
+  runApp(const Mars());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class Mars extends StatelessWidget {
+  const Mars({Key? key}) : super(key: key);
 
   // This widget is the root of your application.
   @override
@@ -54,10 +54,15 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
  
-    return MaterialApp(initialRoute: '/',
-    routes: {
-      '/': (context) => const Home(),
-      '/place_selected': (context) => const PlaceSelected(title: '',)
-    },);
+    return Scaffold(
+      body: Container(
+        decoration: const BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage(
+                  "assets/images/mars.png",
+                ),
+                fit: BoxFit.cover)),
+      ),
+    );
   }
 }
