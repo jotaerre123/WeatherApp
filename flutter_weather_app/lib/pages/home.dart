@@ -24,7 +24,7 @@ class _MyHomePageState extends State<Home> {
        title: 'Place',
     ),
 
-    MapSample(),
+    MapClickPage(),
 
 
     Mars()
