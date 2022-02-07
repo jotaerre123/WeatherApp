@@ -8,10 +8,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_weather_app/models/page.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 const CameraPosition _kInitialPosition =
-    CameraPosition(target: LatLng(-33.852, 151.211), zoom: 11.0);
+    CameraPosition(target: LatLng(37.3754865, -6.0250989), zoom: 11.0);
 
 class MapClickPage extends GoogleMapExampleAppPage {
   const MapClickPage() : super(const Icon(Icons.mouse), 'Map click');
@@ -41,10 +42,15 @@ class _MapClickBodyState extends State<_MapClickBody> {
     final GoogleMap googleMap = GoogleMap(
       onMapCreated: onMapCreated,
       initialCameraPosition: _kInitialPosition,
-      onTap: (LatLng pos) {
+      onTap: (LatLng pos) async {
+        
         setState(() {
           _lastTap = pos;
         });
+
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+              prefs.setDouble('lat', pos.latitude);
+              prefs.setDouble('lng', pos.longitude);
       },
       onLongPress: (LatLng pos) {
         setState(() {
@@ -55,11 +61,11 @@ class _MapClickBodyState extends State<_MapClickBody> {
 
     final List<Widget> columnChildren = <Widget>[
       Padding(
-        padding: const EdgeInsets.all(10.0),
+        padding: const EdgeInsets.only(top: 50.0),
         child: Center(
           child: SizedBox(
             width: MediaQuery.of(context).size.width,
-            height: 700,
+            height: 550,
             child: googleMap,
           ),
         ),
@@ -102,8 +108,10 @@ class _MapClickBodyState extends State<_MapClickBody> {
   }
 
   void onMapCreated(GoogleMapController controller) async {
+    
     setState(() {
       mapController = controller;
     });
+    
   }
 }

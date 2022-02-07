@@ -4,6 +4,7 @@ import 'package:flutter_weather_app/models/city_model.dart';
 import 'package:flutter_weather_app/models/one_call_model.dart';
 
 import 'package:flutter_weather_app/models/weather_model.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:date_format/date_format.dart';
@@ -13,6 +14,7 @@ late Future<List<WeatherModel>> items;
 late String citiSelect = "";
 late double latSelected = 0;
 late double lngSelected = 0;
+late LatLng? _lastTap = null;
 
 @override
 Widget build(BuildContext context) {
@@ -153,9 +155,13 @@ class _MyHomePageState2 extends State<PlaceSelected> {
   Future<WeatherModel> fetchWeather() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var index = prefs.getInt('indexCity');
+    var lat = prefs.getDouble('lat');
+    var lng = prefs.getDouble('lng');
     citiSelect = coord[index!].city;
+    latSelected = lat!;
+    lngSelected = lng!;
     final response = await http.get(Uri.parse(
-        'https://api.openweathermap.org/data/2.5/weather?q=${citiSelect}&appid=b67e3a6f41956f3d2f21725d8148ee93'));
+        'https://api.openweathermap.org/data/2.5/weather?lat=${latSelected}&lon=${lngSelected}&appid=b67e3a6f41956f3d2f21725d8148ee93'));
     if (response.statusCode == 200) {
       return WeatherModel.fromJson(jsonDecode(response.body));
     } else {
@@ -166,9 +172,12 @@ class _MyHomePageState2 extends State<PlaceSelected> {
   Future<List<Daily>> fetchDaily() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var index = prefs.getInt('indexCity');
+    var lat = prefs.getDouble('lat');
+    var lng = prefs.getDouble('lng');
     citiSelect = coord[index!].city;
-    latSelected = coord[index].lat;
-    lngSelected = coord[index].lng;
+    latSelected = lat!;
+    lngSelected = lng!;
+   
 
     final response = await http.get(Uri.parse(
         'https://api.openweathermap.org/data/2.5/onecall?lat=${latSelected}&lon=${lngSelected}&exclude=minutely&appid=b67e3a6f41956f3d2f21725d8148ee93&units=metric'));
@@ -182,9 +191,11 @@ class _MyHomePageState2 extends State<PlaceSelected> {
   Future<List<Hourly>> fetchHourly() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var index = prefs.getInt('indexCity');
+    var lat = prefs.getDouble('lat');
+    var lng = prefs.getDouble('lng');
     citiSelect = coord[index!].city;
-    latSelected = coord[index].lat;
-    lngSelected = coord[index].lng;
+    latSelected = lat!;
+    lngSelected = lng!;
 
     final response = await http.get(Uri.parse(
         'https://api.openweathermap.org/data/2.5/onecall?lat=${latSelected}&lon=${lngSelected}&exclude=minutely&appid=b67e3a6f41956f3d2f21725d8148ee93&units=metric'));
