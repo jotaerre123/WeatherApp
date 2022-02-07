@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_weather_app/models/city_model.dart';
+import 'package:flutter_weather_app/models/days&hours.dart';
 import 'package:flutter_weather_app/models/one_call_model.dart';
 
 import 'package:flutter_weather_app/models/weather_model.dart';
@@ -14,7 +15,7 @@ late Future<List<WeatherModel>> items;
 late String citiSelect = "";
 late double latSelected = 0;
 late double lngSelected = 0;
-late LatLng? _lastTap = null;
+
 
 @override
 Widget build(BuildContext context) {
@@ -87,7 +88,7 @@ class _MyHomePageState2 extends State<PlaceSelected> {
                   ),
                   fit: BoxFit.cover)),
           child: Padding(
-            padding: const EdgeInsets.all(50.0),
+            padding: const EdgeInsets.all(40.0),
             child: Column(
               children: [
                 FutureBuilder<WeatherModel>(
@@ -154,10 +155,9 @@ class _MyHomePageState2 extends State<PlaceSelected> {
 
   Future<WeatherModel> fetchWeather() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    var index = prefs.getInt('indexCity');
     var lat = prefs.getDouble('lat');
     var lng = prefs.getDouble('lng');
-    citiSelect = coord[index!].city;
+    
     latSelected = lat!;
     lngSelected = lng!;
     final response = await http.get(Uri.parse(
@@ -171,10 +171,10 @@ class _MyHomePageState2 extends State<PlaceSelected> {
 
   Future<List<Daily>> fetchDaily() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    var index = prefs.getInt('indexCity');
+    
     var lat = prefs.getDouble('lat');
     var lng = prefs.getDouble('lng');
-    citiSelect = coord[index!].city;
+  
     latSelected = lat!;
     lngSelected = lng!;
    
@@ -190,10 +190,10 @@ class _MyHomePageState2 extends State<PlaceSelected> {
 
   Future<List<Hourly>> fetchHourly() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    var index = prefs.getInt('indexCity');
+    
     var lat = prefs.getDouble('lat');
     var lng = prefs.getDouble('lng');
-    citiSelect = coord[index!].city;
+    
     latSelected = lat!;
     lngSelected = lng!;
 
@@ -326,6 +326,8 @@ class _MyHomePageState2 extends State<PlaceSelected> {
        
       ),
       child: Column(children: [
+        Text(formatDate(listaHoras[index].hora, [HH, ":00 h"])),
+        Image.network('http://openweathermap.org/img/wn/' +hour.weather[0].icon +'.png'),
         Text(hour.pressure.toString(),)
       ],),
     );
@@ -355,6 +357,7 @@ class _MyHomePageState2 extends State<PlaceSelected> {
         color: Colors.blue[800]?.withOpacity(0.8),
       ),
       child: Column(children: [
+        Text(formatDate(listaDias[index].day, [DD], locale: const SpanishDateLocale())),
         Text(daily.pressure.toString(),),
         Image.network('http://openweathermap.org/img/wn/' +daily.weather[0].icon +'.png'),
         Text(daily.temp.day.toString()),
