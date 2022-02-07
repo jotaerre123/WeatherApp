@@ -61,7 +61,8 @@ class _MyHomePageState extends State<MyHomePage> {
     routes: {
       '/': (context) => const Home(),
       '/place_selected': (context) => const PlaceSelected(title: '',),
-      '/mars': (context) => const Mars()
+      '/mars': (context) => const Mars(),
+      
     },);
   }
 }
