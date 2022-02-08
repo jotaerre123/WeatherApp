@@ -60,7 +60,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return MaterialApp(initialRoute: '/',
     routes: {
       '/': (context) => const Home(),
-      '/place_selected': (context) => const PlaceSelected(title: '',),
+      '/place_selected': (context) => const PlaceSelected2(title: '',),
       '/mars': (context) => const Mars(),
       
     },);
