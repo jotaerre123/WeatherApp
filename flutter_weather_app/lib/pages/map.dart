@@ -34,7 +34,7 @@ class _MapClickBodyState extends State<_MapClickBody> {
   _MapClickBodyState();
 
   GoogleMapController? mapController;
-  LatLng? _lastTap;
+  LatLng _lastTap = LatLng(37.3754865, -6.0250989);
   LatLng? _lastLongPress;
 
   @override
@@ -52,6 +52,7 @@ class _MapClickBodyState extends State<_MapClickBody> {
               prefs.setDouble('lat', pos.latitude);
               prefs.setDouble('lng', pos.longitude);
       },
+      markers: <Marker>{_createMarker()},
       onLongPress: (LatLng pos) {
         setState(() {
           _lastLongPress = pos;
@@ -65,41 +66,12 @@ class _MapClickBodyState extends State<_MapClickBody> {
         child: Center(
           child: SizedBox(
             width: MediaQuery.of(context).size.width,
-            height: 550,
+            height: MediaQuery.of(context).size.height -150,
             child: googleMap,
           ),
         ),
       ),
     ];
-
-    if (mapController != null) {
-      final String lastTap = 'Tap:\n${_lastTap ?? ""}\n';
-      final String lastLongPress = 'Long press:\n${_lastLongPress ?? ""}';
-      columnChildren.add(Center(
-          child: Text(
-        lastTap,
-        textAlign: TextAlign.center,
-        style: TextStyle(color: Colors.white),
-      )));
-      columnChildren.add(Center(
-          child: Text(
-        _lastTap != null ? 'Tapped' : '',
-        textAlign: TextAlign.center,
-        style: TextStyle(color: Colors.white)
-      )));
-      columnChildren.add(Center(
-          child: Text(
-        lastLongPress,
-        textAlign: TextAlign.center,
-        style: TextStyle(color: Colors.white)
-      )));
-      columnChildren.add(Center(
-          child: Text(
-        _lastLongPress != null ? 'Long pressed' : '',
-        textAlign: TextAlign.center,
-        style: TextStyle(color: Colors.white)
-      )));
-    }
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -113,5 +85,11 @@ class _MapClickBodyState extends State<_MapClickBody> {
       mapController = controller;
     });
     
+  }
+  Marker _createMarker() {
+      return Marker(
+        markerId: MarkerId("marker_1"),
+        position: _lastTap,
+      );
   }
 }
