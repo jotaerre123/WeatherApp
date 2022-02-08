@@ -327,7 +327,8 @@ class _MyHomePageState2 extends State<PlaceSelected> {
       ),
       child: Column(children: [
         Text(formatDate(listaHoras[index].hora, [HH, ":00 h"])),
-        Image.network('http://openweathermap.org/img/wn/' +hour.weather[0].icon +'.png'),
+        Image.asset('assets/images/${hour.weather[0].icon}.png', scale: 5,),
+        //Image.network('http://openweathermap.org/img/wn/' +hour.weather[0].icon +'.png'),
         Text(hour.pressure.toString(),)
       ],),
     );
@@ -359,7 +360,7 @@ class _MyHomePageState2 extends State<PlaceSelected> {
       child: Column(children: [
         Text(formatDate(listaDias[index].day, [DD], locale: const SpanishDateLocale())),
         Text(daily.pressure.toString(),),
-        Image.network('http://openweathermap.org/img/wn/' +daily.weather[0].icon +'.png'),
+        Image.asset('assets/images/${daily.weather[0].icon}.png', scale: 5,),
         Text(daily.temp.day.toString()),
       ],),
     );
