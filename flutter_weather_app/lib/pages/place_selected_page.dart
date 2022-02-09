@@ -372,8 +372,13 @@ class _MyHomePageState2 extends State<PlaceSelected2> {
   Widget _hourlyItem(Hourly hour, int index) {
     Size size = MediaQuery.of(context).size;
     dynamic temp = (hour.temp);
-    double wind = (hour.windSpeed);
-    int rain = hour.humidity;
+    dynamic wind = (hour.windSpeed);
+    dynamic rain;
+    if (hour.rain != null) {
+      rain = hour.rain;
+    }else{
+      rain = 0;
+    }
     return Padding(
       padding: EdgeInsets.all(size.width * 0.025),
       child: Column(
@@ -441,7 +446,9 @@ class _MyHomePageState2 extends State<PlaceSelected2> {
             ],
           ),
           Text(
-            rain.toString() + '%',
+            rain.toString().replaceAll("{1h:", "")
+          .replaceAll("}", "")
+          .replaceAll("0.", "") + '%',
             style: TextStyle(
               color: Colors.blue,
               fontSize: size.height * 0.02,
