@@ -282,6 +282,7 @@ class _MyHomePageState2 extends State<PlaceSelected2> {
   Widget name(WeatherModel response) {
     return Text(
       response.name,
+      overflow: TextOverflow.ellipsis,
       style: const TextStyle(color: Colors.white, fontSize: 60),
     );
   }
