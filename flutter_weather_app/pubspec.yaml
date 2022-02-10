@@ -94,6 +94,8 @@ flutter:
    - assets/images/iconmars.png
    - assets/images/iconearth.png
    - assets/images/iconmap.png
+   - assets/images/marsd1.gif
+   - assets/images/destinyIcon.png
 
 
 
@@ -111,11 +113,10 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
+  fonts:
+    - family: Destiny
+      fonts:
+        - asset: assets/fonts/futura.ttf
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf

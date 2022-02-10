@@ -62,6 +62,16 @@ class _MyHomePageState extends State<MyHomePage> {
                   "assets/images/mars.png",
                 ),
                 fit: BoxFit.cover)),
+                child: Center(
+
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('DESTINY AWAITS', style:TextStyle(color: Colors.white, fontFamily: 'Destiny', fontSize: 35)),
+                      Image.asset('assets/images/marsd1.gif',),
+                    ],
+                  ),
+                ),
       ),
     );
   }

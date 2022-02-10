@@ -59,7 +59,7 @@ class _MyHomePageState extends State<Home> {
       bottomNavigationBar: CurvedNavigationBar(
 
         backgroundColor: Colors.black,
-        animationDuration: const Duration(milliseconds: 1500),
+        animationDuration: const Duration(milliseconds: 500),
         animationCurve: Curves.easeIn,
         color: Colors.black,
         buttonBackgroundColor: Colors.amberAccent,
@@ -67,17 +67,9 @@ class _MyHomePageState extends State<Home> {
         height: 60,
         
         items:  <Widget>[
-          
-             Image.asset('assets/images/iconearth.png'),
-            
-          
-          
+           Image.asset('assets/images/iconearth.png'),
            Image.asset('assets/images/iconmap.png'),
-
-          
-            Image.asset('assets/images/iconmars.png'),
-            
-          
+           Image.asset('assets/images/destinyIcon.png', width: 55,),
         ],
         onTap: _onItemTapped,
       ),

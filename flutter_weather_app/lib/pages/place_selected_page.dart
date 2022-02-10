@@ -64,7 +64,7 @@ class _MyHomePageState2 extends State<PlaceSelected2> {
         child: Center(
           child: Text(
                 'NO HAY CIUDAD SELECCIONADA',
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(color: Colors.white, fontFamily: 'Destiny', fontSize: 20),
           ),
         ),));
     }
@@ -112,7 +112,7 @@ class _MyHomePageState2 extends State<PlaceSelected2> {
                           child: const Align(
                             child: Text('Current Location',
                                 style: TextStyle(
-                                    color: Colors.white54, fontSize: 20)),
+                                    color: Colors.white54, fontSize: 20, fontFamily: 'Destiny')),
                           ),
                         ),
                         Padding(
@@ -183,7 +183,7 @@ class _MyHomePageState2 extends State<PlaceSelected2> {
                                       style: TextStyle(
                                         color: Colors.white,
                                         fontSize: size.height * 0.025,
-                                        fontWeight: FontWeight.bold,
+                                        fontWeight: FontWeight.bold, fontFamily: 'Destiny'
                                       ),
                                     ),
                                   ),
@@ -237,6 +237,7 @@ class _MyHomePageState2 extends State<PlaceSelected2> {
                                                 color: Colors.white,
                                                 fontSize: size.height * 0.025,
                                                 fontWeight: FontWeight.bold,
+                                                fontFamily: 'Destiny'
                                               ),
                                             ),
                                           ),
@@ -283,7 +284,7 @@ class _MyHomePageState2 extends State<PlaceSelected2> {
     return Text(
       response.name,
       overflow: TextOverflow.ellipsis,
-      style: const TextStyle(color: Colors.white, fontSize: 60),
+      style: const TextStyle(color: Colors.white, fontSize: 60, fontFamily: 'Destiny'),
     );
   }
 
@@ -298,6 +299,7 @@ class _MyHomePageState2 extends State<PlaceSelected2> {
     return Text(
       temperature.toStringAsFixed(1) + '˚C', //curent temperature
       style: TextStyle(
+        fontFamily: 'Destiny',
         color: temperature <= 0
             ? Colors.blue
             : temperature > 0 && temperature <= 15
@@ -322,6 +324,7 @@ class _MyHomePageState2 extends State<PlaceSelected2> {
         Text(
           min.toStringAsFixed(1) + '˚C',
           style: TextStyle(
+            fontFamily: 'Destiny',
             color: min <= 0
                 ? Colors.blue
                 : min > 0 && min <= 15
@@ -335,6 +338,7 @@ class _MyHomePageState2 extends State<PlaceSelected2> {
         Text(
           '/',
           style: TextStyle(
+            fontFamily: 'Destiny',
             color: Colors.white54,
             fontSize: size.height * 0.03,
           ),
@@ -386,6 +390,7 @@ class _MyHomePageState2 extends State<PlaceSelected2> {
           Text(
             formatDate(listaHoras[index].hora, [HH, ":00 h"]),
             style: TextStyle(
+              fontFamily: 'Destiny',
               color: Colors.white,
               fontSize: size.height * 0.02,
             ),
@@ -406,6 +411,7 @@ class _MyHomePageState2 extends State<PlaceSelected2> {
           Text(
             temp.toStringAsFixed(1) + '˚C',
             style: TextStyle(
+              fontFamily: 'Destiny',
               color: Colors.white,
               fontSize: size.height * 0.025,
             ),
@@ -427,6 +433,7 @@ class _MyHomePageState2 extends State<PlaceSelected2> {
           Text(
             wind.toString() + 'km/h',
             style: TextStyle(
+              fontFamily: 'Destiny',
               color: Colors.grey,
               fontSize: size.height * 0.02,
             ),
@@ -452,6 +459,7 @@ class _MyHomePageState2 extends State<PlaceSelected2> {
             style: TextStyle(
               color: Colors.blue,
               fontSize: size.height * 0.02,
+              fontFamily: 'Destiny'
             ),
           ),
         ],
@@ -497,6 +505,7 @@ class _MyHomePageState2 extends State<PlaceSelected2> {
                   style: TextStyle(
                     color:Colors.white,
                     fontSize: size.height * 0.025,
+                    fontFamily: 'Destiny'
                   ),
                 ),
               ),
@@ -519,6 +528,7 @@ class _MyHomePageState2 extends State<PlaceSelected2> {
                     style: TextStyle(
                       color: Colors.white38,
                       fontSize: size.height * 0.025,
+                      fontFamily: 'Destiny'
                     ),
                   ),
                 ),
@@ -534,6 +544,7 @@ class _MyHomePageState2 extends State<PlaceSelected2> {
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: size.height * 0.025,
+                      fontFamily: 'Destiny'
                     ),
                   ),
                 ),
