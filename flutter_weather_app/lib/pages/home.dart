@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_weather_app/pages/place_selected_page.dart';
-
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'city_selection_page.dart';
 import 'map.dart';
 import 'mars_page.dart';
@@ -56,25 +56,29 @@ class _MyHomePageState extends State<Home> {
         
       ),
 
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.black87,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home_outlined),
-            label: 'Current',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.map_outlined,),
-            label: 'City',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.filter_tilt_shift_sharp),
-            label: 'Mars',
-          ),
+      bottomNavigationBar: CurvedNavigationBar(
+
+        backgroundColor: Colors.black,
+        animationDuration: const Duration(milliseconds: 1500),
+        animationCurve: Curves.easeIn,
+        color: Colors.black,
+        buttonBackgroundColor: Colors.amberAccent,
+        index: _selectedIndex,
+        height: 60,
+        
+        items:  <Widget>[
+          
+             Image.asset('assets/images/iconearth.png'),
+            
+          
+          
+           Image.asset('assets/images/iconmap.png'),
+
+          
+            Image.asset('assets/images/iconmars.png'),
+            
+          
         ],
-       currentIndex: _selectedIndex,
-        selectedItemColor: Colors.amber[800],
-        unselectedItemColor: Colors.white70,
         onTap: _onItemTapped,
       ),
     );
