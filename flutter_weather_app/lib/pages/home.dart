@@ -67,7 +67,7 @@ class _MyHomePageState extends State<Home> {
         height: 60,
         
         items:  <Widget>[
-           Image.asset('assets/images/iconearth.png'),
+           Image.asset('assets/images/iconearth.png', width: 55),
            Image.asset('assets/images/iconmap.png'),
            Image.asset('assets/images/destinyIcon.png', width: 55,),
         ],
